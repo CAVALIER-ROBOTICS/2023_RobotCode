@@ -8,13 +8,16 @@ import frc.robot.commands.Autos;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.VacuumCommand;
 import frc.robot.commands.WristCommand;
+import frc.robot.commands.WristRotateClockCommand;
+import frc.robot.commands.WristRotateCounterCommand;
 import frc.robot.commands.ArmCommands.ArmAngleCommand;
 import frc.robot.commands.ArmCommands.ArmInCommand;
 import frc.robot.commands.DriveCommands.FieldDriveCommand;
 import frc.robot.commands.DriveCommands.RobotDriveCommand;
 import frc.robot.subsystems.DriveTrainSubsystems;
 import frc.robot.subsystems.ExampleSubsystem;
-import frc.robot.subsystems.WristSub;
+import frc.robot.subsystems.WristRotateSubsystem;
+import frc.robot.subsystems.WristSubsystem;
 import frc.robot.subsystems.ArmSubsystems.ArmAngleSubsytem;
 import frc.robot.subsystems.ArmSubsystems.ArmExtendSubsystem;
 import frc.robot.subsystems.VacuumSubsystems.VacuumSubsystem;
@@ -39,8 +42,10 @@ public class RobotContainer {
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private static final XboxController driver = new XboxController(0);
   private static final XboxController operator = new XboxController(1);
+
   ArmAngleSubsytem armAngleSub = new ArmAngleSubsytem();
-  WristSub wristSubsystem = new WristSub();
+  WristSubsystem wristSub = new WristSubsystem();
+  WristRotateSubsystem wristRotSub = new WristRotateSubsystem();
   DriveTrainSubsystems driveSub = new DriveTrainSubsystems();
 
   VacuumSubsystem vacSub = new VacuumSubsystem();
@@ -75,29 +80,29 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
-    // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
-    new Trigger(m_exampleSubsystem::exampleCondition)
-        .onTrue(new ExampleCommand(m_exampleSubsystem));
         JoystickButton changeDrive = new JoystickButton(driver, 4);
 
         JoystickButton driveForward = new JoystickButton(driver, 1);
         JoystickButton resetGyro = new JoystickButton(driver, 4);
         JoystickButton setVacuum = new JoystickButton(operator, 1);
+
+        JoystickButton wristClock = new JoystickButton(operator, 7);
+        JoystickButton wristCounter = new JoystickButton(operator, 6);
     
         armAngleSub.setDefaultCommand(new ArmAngleCommand(armAngleSub, operator::getLeftY));
-        // operator::getRightY));
+
         resetGyro.whileTrue(new InstantCommand(driveSub::zeroGyroscope));
         setVacuum.whileTrue(new VacuumCommand(vacSub));
     
         armOut.whileTrue(new ArmInCommand(armExtendSubsystem));
         armIn.whileTrue(new ArmInCommand(armExtendSubsystem));
+
+        wristClock.whileTrue(new WristRotateClockCommand(wristRotSub));
+        wristCounter.whileTrue(new WristRotateCounterCommand(wristRotSub));
     
-        wristSubsystem.setDefaultCommand(new WristCommand(wristSubsystem, operator::getRightY));
+        wristSub.setDefaultCommand(new WristCommand(wristSub, operator::getRightY));
 
         changeDrive.whileTrue(new InstantCommand(driveSub::zeroGyroscope));
-
-    // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
-    // cancelling on release.
   }
 
   /**

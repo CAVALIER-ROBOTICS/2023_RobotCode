@@ -6,33 +6,33 @@ package frc.robot.commands;
 
 import java.util.function.DoubleSupplier;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.networktables.DoubleSubscriber;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.WristSubsystem;
+import frc.robot.subsystems.WristRotateSubsystem;
 
-public class WristCommand extends CommandBase {
-  /** Creates a new WristCommand. */
-  WristSubsystem wristSub;
-  DoubleSupplier dubSub;
-  public WristCommand(WristSubsystem wSub, DoubleSupplier dSup) {
-    wristSub = wSub;
-    dubSub = dSup;
-    addRequirements(wristSub);
+public class WristRotateClockCommand extends CommandBase {
+  /** Creates a new WristRotCommand. */
+  WristRotateSubsystem wristRotSub;
+  public WristRotateClockCommand(WristRotateSubsystem wSub) {
+    wristRotSub = wSub;
+    addRequirements(wristRotSub);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    wristRotSub.setPercentage(.25);
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {
-    wristSub.setWrist(dubSub.getAsDouble() * .15);
-  }
+  public void execute() {}
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    wristRotSub.setPercentage(0);
+  }
 
   // Returns true when the command should end.
   @Override

@@ -12,12 +12,12 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class WristSub extends SubsystemBase {
+public class WristSubsystem extends SubsystemBase {
   CANSparkMax wristMotor = new CANSparkMax(44, MotorType.kBrushless);
   SparkMaxPIDController wristPID = wristMotor.getPIDController();
   RelativeEncoder wristEncoder = wristMotor.getEncoder();
   /** Creates a new WristSub. */
-  public WristSub() {
+  public WristSubsystem() {
     wristPID.setP(0.0);
     wristPID.setI(0.0);
     wristPID.setD(0.0);

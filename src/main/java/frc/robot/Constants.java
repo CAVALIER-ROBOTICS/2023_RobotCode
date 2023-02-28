@@ -39,6 +39,7 @@ public final class Constants {
         public static final String simpleAuto = "SimpleAuto";
 
         public static final int wristID = 44;
+        public static final int wristRotID = 55;
 
         public static final int vacuum99ID = 99;
         public static final int vacuum88ID = 88;

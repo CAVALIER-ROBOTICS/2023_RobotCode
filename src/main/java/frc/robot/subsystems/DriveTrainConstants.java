@@ -35,19 +35,19 @@ public interface DriveTrainConstants {
   public static final int frontRightDriveMotor = 3;
   public static final int frontRightSteerMotor = 4; 
   public static final int frontRightSteerEncoder = 51; 
-  public static final double frontRightModuleSteerOffset = Math.toRadians(120); 
+  public static final double frontRightModuleSteerOffset = Math.toRadians(0); 
 
   //BACK LEFT
   public static final int backLeftDriveMotor = 7; 
   public static final int backLeftSteerMotor = 8; 
   public static final int backLeftSteerEncoder = 53;
-  public static final double backLeftModuleSteerOffset = Math.toRadians(274 + 180); 
+  public static final double backLeftModuleSteerOffset = Math.toRadians(0); 
 
   //BACK RIGHT
   public static final int backRightDriveMotor = 5; 
   public static final int backRightSteerMotor = 6;
   public static final int backRightSteerEncoder = 50; 
-  public static final double backRightModuleSteerOffset = Math.toRadians(180);
+  public static final double backRightModuleSteerOffset = Math.toRadians(0);
 
   public static final int volts = 12;
   public static final int voltsSecondsPerMeter = 7;

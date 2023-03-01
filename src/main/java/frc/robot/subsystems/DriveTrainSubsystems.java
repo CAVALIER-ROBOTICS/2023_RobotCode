@@ -80,11 +80,6 @@ public class DriveTrainSubsystems extends SubsystemBase implements DriveTrainCon
     MkSwerveModuleBuilder frontRightModuleBuilder = new MkSwerveModuleBuilder();
     MkSwerveModuleBuilder frontLeftModuleBuilder = new MkSwerveModuleBuilder();
 
-    backLeftModuleBuilder.withSteerOffset(DriveTrainConstants.backLeftModuleSteerOffset);
-    backRightModuleBuilder.withSteerOffset(DriveTrainConstants.backRightModuleSteerOffset);
-    frontRightModuleBuilder.withSteerOffset(DriveTrainConstants.frontRightModuleSteerOffset);
-    frontLeftModuleBuilder.withSteerOffset(DriveTrainConstants.frontLeftModuleSteerOffset);
-
     backLeftModuleBuilder.withGearRatio(mechCon);
     backRightModuleBuilder.withGearRatio(mechCon);
     frontRightModuleBuilder.withGearRatio(mechCon);
@@ -93,10 +88,6 @@ public class DriveTrainSubsystems extends SubsystemBase implements DriveTrainCon
     backLeftModuleBuilder.withDriveMotor(MotorType.FALCON, DriveTrainConstants.backLeftDriveMotor, "OTHERCANIVORE");
     backLeftModuleBuilder.withSteerMotor(MotorType.FALCON, DriveTrainConstants.backLeftSteerMotor, "OTHERCANIVORE");
     backLeftModuleBuilder.withSteerEncoderPort(DriveTrainConstants.backRightSteerEncoder, "OTHERCANIVORE");
-    
-    /* backLeftModuleBuilder.withGearRatio(new
-    MechanicalConfiguration(backLeftSteerEncoder, backLeftModuleSteerOffset,
-    false, backLeftDriveMotor, false)) */
 
     backRightModuleBuilder.withDriveMotor(MotorType.FALCON, DriveTrainConstants.backRightDriveMotor, "OTHERCANIVORE");
     backRightModuleBuilder.withSteerMotor(MotorType.FALCON, DriveTrainConstants.backRightSteerMotor, "OTHERCANIVORE");
@@ -109,6 +100,18 @@ public class DriveTrainSubsystems extends SubsystemBase implements DriveTrainCon
     frontLeftModuleBuilder.withDriveMotor(MotorType.FALCON, DriveTrainConstants.frontLeftDriveMotor, "OTHERCANIVORE");
     frontLeftModuleBuilder.withSteerMotor(MotorType.FALCON, DriveTrainConstants.frontLeftSteerMotor, "OTHERCANIVORE");
     frontLeftModuleBuilder.withSteerEncoderPort(DriveTrainConstants.frontLeftSteerEncoder, "OTHERCANIVORE");
+
+    try {
+      TimeUnit.SECONDS.sleep(10);
+    } catch (InterruptedException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+
+    backLeftModuleBuilder.withSteerOffset(DriveTrainConstants.backLeftModuleSteerOffset);
+    backRightModuleBuilder.withSteerOffset(DriveTrainConstants.backRightModuleSteerOffset);
+    frontRightModuleBuilder.withSteerOffset(DriveTrainConstants.frontRightModuleSteerOffset);
+    frontLeftModuleBuilder.withSteerOffset(DriveTrainConstants.frontLeftModuleSteerOffset);
 
     frontLeftModule = frontLeftModuleBuilder.build();
     frontRightModule = frontRightModuleBuilder.build();
